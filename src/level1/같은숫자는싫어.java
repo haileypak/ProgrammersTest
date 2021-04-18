@@ -1,4 +1,11 @@
 package level1;
+
+import org.w3c.dom.stylesheets.LinkStyle;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  -------------- 같은 숫자는 싫어 --------------
  문제 설명
@@ -22,11 +29,12 @@ package level1;
  * **/
 public class 같은숫자는싫어 {
     public static void main(String[] args) {
-        int[] input = {1, 1, 3, 3, 0, 1, 1};
+      //  int[] input = {1, 1, 3, 3, 0, 1, 1};
+        int[] input = {4, 4, 4, 3, 3};
 
-        같은숫자는싫어_Solution s = new 같은숫자는싫어_Solution;
+        같은숫자는싫어_Solution s = new 같은숫자는싫어_Solution();
         int[] result = s.solution(input);
-        System.out.println(result);
+        System.out.println(Arrays.toString(result));
 
     }
 }
@@ -34,10 +42,19 @@ public class 같은숫자는싫어 {
 class 같은숫자는싫어_Solution {
     public int[] solution(int []arr) {
         int[] answer = {};
-        for (int i=0; i<arr.length; i++) {
+        List<Integer> temp = new ArrayList<>();
 
+        temp.add(arr[0]);       //첫번째 숫자는 무조건 담기
+
+        for (int i=1; i<arr.length; i++) {
+            if ( temp.get(temp.size()-1) != arr[i] ) {    //리스트의 마지막 숫자와 현재 값이 같지 않으면 담기
+                temp.add(arr[i]);
+            }
         }
-
+        answer = new int[temp.size()];
+        for (int i=0; i<temp.size(); i++) {
+            answer[i] = temp.get(i);
+        }
         return answer;
     }
 }
